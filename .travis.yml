@@ -1,12 +1,17 @@
-branch:
-    only:
-    - "master"
+sudo: false
+addons:
+  apt_packages:
+    - libgl1-mesa-dev
+    - xorg-dev
 language: go
-before_install:
-    - sudo apt-get -qq update
-    - sudo apt-get install -y libopenal-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev xorg-dev libgl1-mesa-dev xvfb
 go:
-- 1.6.2
-script: ./test.sh
-
-
+  - 1.6.2
+install:
+  - # Do nothing. This is needed to prevent default install action "go get -t -v ./..." from happening here (we want it to happen inside script step).
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3 # Give xvfb some time to start.
+script:
+  - go get -t -v ./...
+  - go run main.go
