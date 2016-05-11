@@ -8,7 +8,7 @@ before_install:
 go:
 - 1.6.2
 script:
-    - sudo Xvfb :10 -ac &
+    - Xvfb :10 -ac &
     - export DISPLAY=:10
     - go run main.go
 
