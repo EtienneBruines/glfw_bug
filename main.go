@@ -24,6 +24,6 @@ func main() {
 
 	window.MakeContextCurrent()
 
-	log.Println("Sleeping to keep window open")
+	log.Println("Sleeping to keep the invisible window open")
 	time.Sleep(time.Second * 10)
 }
